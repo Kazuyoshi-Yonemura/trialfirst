@@ -53,4 +53,4 @@ jobs:
           app-name: 'CJLAZUREMAPTOP'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_29A17BE3BA6F428CBCB92D2C01681626 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_676256121BB64BE0A45A582C361DB7D4 }}
