@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Simple Image Layer - Azure Maps Web SDK Samples</title>
+
+    <meta charset="utf-8" />
+	<link rel="shortcut icon" href="/favicon.ico"/>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="This sample shows how to overlay an image on the map as an Image layer." />
+    <meta name="keywords" content="Microsoft maps, map, gis, API, SDK, image, raster, layer, ground overlay, groundoverlay" />
+    <meta name="author" content="Microsoft Azure Maps" /><meta name="version" content="1.0" />
+    <meta name="screenshot" content="screenshot.jpg" />
+
+    <!-- Add references to the Azure Maps Map control JavaScript and CSS files. -->
+    <link href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.css" rel="stylesheet" />
+    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.js"></script>
+
+    <script>
+        var map;
+
+        function getMap() {
+            //Initialize a map instance.
+            map = new atlas.Map('myMap', {
+                center: [134.9033592372498, 34.70750958592122], // -74.18, 40.740
+                zoom: 16,
+                view: 'Auto',
+
+                //Add authentication details for connecting to Azure Maps.
+                authOptions: {
+                    //Use Microsoft Entra ID authentication.
+//                    authType: 'anonymous',
+//                    clientId: 'e6b6ab59-eb5d-4d25-aa57-581135b927f0', //Your Azure Maps client id for accessing your Azure Maps account.
+//                    getToken: function (resolve, reject, map) {
+//                        //URL to your authentication service that retrieves an Microsoft Entra ID Token.
+//                        var tokenServiceUrl = 'https://samples.azuremaps.com/api/GetAzureMapsToken';
+//
+//                        fetch(tokenServiceUrl).then(r => r.text()).then(token => resolve(token));
+//                    }
+
+                    //Alternatively, use an Azure Maps key. Get an Azure Maps key at https://azure.com/maps. NOTE: The primary key should be used as the key.
+                    authType: 'subscriptionKey',
+                    subscriptionKey: '4ScXIJ4d7k8pRCvqqK4IJZc4sovJKR5i1oUckQ8eu2MSYMYVSaDMJQQJ99AEACYeBjFq259BAAAgAZMPUzVb'
+                }
+            });
+
+            //Wait until the map resources are ready.
+            map.events.add('ready', function () {
+
+                //Create an image layer and add it to the map.
+                map.layers.add(new atlas.layer.ImageLayer({
+                    url: 'https://cjlazuremaps01.blob.core.windows.net/azure-maps-data-registry/CJLr2-0.5.jpg?sp=r&st=2024-06-26T04:03:27Z&se=2024-12-26T12:03:27Z&spr=https&sv=2022-11-02&sr=b&sig=%2Bmojw1P9ADw0ZETPyGx7cz%2BAom7XinyH%2BdRwSX9FzJg%3D', 
+
+                    coordinates: [
+                        [134.90184154604643, 34.70799012510923], //Top Left Corner-74.22655, 40.773941 //34.70799012510923, 134.90184154604643
+						[134.90330902033267, 34.70881321049793], //Top Right Corner-74.12544, 40.773941  //34.70881321049793, 134.90330902033267
+						[134.90504331841097, 34.70672911428028], //Bottom Right Corner-74.12544, 40.712216 //34.70672911428028, 134.90504331841097
+						[134.90363819877348, 34.705925811841645]  //Bottom Left Corner-74.22655, 40.712216 //34.705925811841645, 134.90363819877348
+                    ]
+                }));
+
+
+                //Create an image layer and add it to the map.
+                map.layers.add(new atlas.layer.ImageLayer({
+                    url: 'https://cjlazuremaps01.blob.core.windows.net/azure-maps-data-registry/VIC-Sat%20pic.jpg?sp=r&st=2024-06-26T04:06:13Z&se=2024-12-26T12:06:13Z&spr=https&sv=2022-11-02&sr=b&sig=w%2BMUDC%2BnqecBNAo1Es1h6H6Gps9d8F1qbHFDnf2wEfw%3D',
+
+                    coordinates: [
+                        [-96.93883212267178, 28.820129872850526], //Top Left Corner-74.22655, 40.773941// 28.820129872850526, -96.93883212267178
+                        [-96.93701718220848, 28.82101017353403], //Top Right Corner-74.12544, 40.773941 //28.82101017353403, -96.93701718220848
+                        [-96.9352000982822, 28.81813812565504], //Bottom Right Corner-74.12544, 40.712216 // 28.818138125655043, -96.9352000982822
+                        [-96.93700385038785, 28.81725852974933]  //Bottom Left Corner-74.22655, 40.712216 // 28.81725852974933, -96.93700385038785
+                    ]
+                }));
+
+
+
+            });
+        }
+    </script>
+</head>
+<body onload="getMap()">
+    <div id="myMap" style="position:relative;width:100%;min-width:290px;height:600px;"></div>
+
+    <fieldset style="width:calc(100% - 30px);min-width:290px;margin-top:10px;">
+        <legend>Simple Image Layer</legend>
+        This sample shows how to overlay an <a href="https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg">image</a> of a map of Newark New Jersey from 1922 as an Image layer.
+    </fieldset>
+</body>
+</html>
